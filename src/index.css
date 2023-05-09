@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.baseText {
+  position: absolute;
+  top: 0px;
+
+  color: rgb(40, 59, 83);
+  font-size: xx-large;
+  font-family: 'Trebuchet MS';
+}
+
+.upperText {
+  position: absolute;
+  top: 0px;
+  
+  color: green;
+  font-size: xx-large;
+  font-family: 'Trebuchet MS';
+}
+
+.containerDiv {
+  position: relative;
+  margin: 0rem 3rem 10rem 3rem;
+}
+
+.my-class {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
+}
