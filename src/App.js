@@ -51,7 +51,7 @@ function App() {
         <p className="bold-text">This text is bold</p>
 
       </div>
-      <div className={`my-class ${isGreen ? 'green' : 'red'}`}>
+      <div className={`${isGreen ? 'green' : 'red'}`}>
         <button onClick={toggleColor}>Toggle color</button>
         <p>This is my class</p>
       </div>
