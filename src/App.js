@@ -4,7 +4,7 @@ import './index.css';
 function App() {
   const [text, setText] = useState("");
   const [userInput, setUserInput] = useState("");
-  const [promptText, setPromptText] = useState("typ");
+  const [promptText, setPromptText] = useState("type out this string");
   const [isInputMatch, setIsInputMatch] = useState(false);
   const [isInputEnabled, setIsInputEnabled] = useState(true);
   const [lastCharMatch, setLastCharMatch] = useState(true);
@@ -26,14 +26,6 @@ function App() {
     if (inputValue == promptText) {
       setIsInputMatch(true);
     }
-
-    if (!lastCharMatch && lastIndex < promptText.length) {
-      const updatedPromptText = promptText.slice(0, lastIndex) + `<span style="color: red">${promptText[lastIndex]}</span>` + promptText.slice(lastIndex + 1);
-      setPromptText(updatedPromptText);
-    } else if (lastCharMatch) {
-      setPromptText(promptText.replace('<span style="color: red">', '').replace('</span>', ''));
-    }
-
   };
 
   const checkLastChar = (inputValue) => {
@@ -50,18 +42,24 @@ function App() {
     }
   }
 
-  const promptTextArray = promptText.split("");
-  const lastCharStyle = lastCharMatch ? {} : { color: "red" };
-
   return (
     <div style={{ display: "flex" }}>
       <div style={{ flex: 1 }}>
         <div className="containerDiv">
-        
-        <p className="promptText" dangerouslySetInnerHTML={{ __html: promptText }}></p>
-        {/* <p className ="inputText">
-          {text}
-        </p> */}
+          <div className="promptText">
+            {promptText.split('').map((char, index) => (
+              <p key={index} className={index === text.length - 1 && !lastCharMatch ? 'hidden' : 'correct'}>
+                {char === ' ' ? '\u00A0' : char} 
+              </p> /*allows for spaces */
+            ))}
+          </div>
+        </div>
+        <div className= "inputText">
+          {text.split('').map((char, index) => (
+            <p key={index} className={index === text.length - 1 && !lastCharMatch ? 'wrong' : 'correct'}>
+              {char === ' ' ? '\u00A0' : char} 
+            </p> /*allows for spaces */
+          ))}
         </div>
         <input
           type="text"
@@ -72,6 +70,7 @@ function App() {
               let editedText = text.slice(0, -1);
               setText(editedText);
               setIsInputEnabled(true);
+              setLastCharMatch(true);
               console.log("test");
             }
           }}

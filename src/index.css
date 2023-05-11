@@ -22,11 +22,14 @@ code {
   font-family: 'Trebuchet MS';
 }
 
-.containerDiv {
-  position: relative;
-  margin: 0rem 3rem 10rem 3rem;
+.promptText {
+  display: flex;
+  color: gray;
 }
 
+.containerDiv {
+  margin: 0rem 3rem 10rem 3rem;
+}
 .green {
   background-color: green;
 }
@@ -35,12 +38,20 @@ code {
   background-color: red;
 }
 
-.promptText {
-  color: gray;
-}
-
 .promptText, .inputText {
   position: absolute;
   top: 0;
   left: 10px;
+}
+
+.inputText {
+  display: flex;
+}
+
+.wrong {
+  color: red;
+}
+
+.hidden {
+  visibility: hidden;
 }
