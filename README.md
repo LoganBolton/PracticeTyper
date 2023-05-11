@@ -1,7 +1,16 @@
 Task Goals
 
-# Format 
-
+# Process Flow 
+1. take in user input
+2. check if char in input matches prompt
+3. If input does NOT then make lastCharMatch false
+    3a. disable user input with isInputEnabled
+    3b. allow for the delete key to be pressed
+    3c. don't set state for text
+4. If input DOES match prompt
+    4a. set lastCharMatch to true
+    4b. set isInputEnabled to true
+    4c. set text to be target value 
 
 
 # Getting Started with Create React App
