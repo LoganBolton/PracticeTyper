@@ -5,13 +5,11 @@ import './index.css';
 function App() {
   const [text, setText] = useState("");
   const [promptText, setpromptText] = useState("Type out this string.");
-  const [isGreen, setIsGreen] = useState(false);
+  const [isInputMatch, setIsInputMatch] = useState(false);
+  const [isInputEnabled, setIsInputEnabled] = useState(true);
+  const [lastCharMatch, setLastCharMatch] = useState(true);
 
-  const lastCharMatch = text[text.length - 1] === promptText[text.length - 1];
-  
-  const toggleColor = () => {
-    setIsGreen(!isGreen);
-  };
+  // const lastCharMatch = text[text.length - 1] === promptText[text.length - 1];
 
   const statusSquare = lastCharMatch ? (
     <div style={{ backgroundColor: "green", width: 50, height: 50 }}></div>
@@ -24,7 +22,7 @@ function App() {
     return (
       <>
         {textArray.map((char, index) => {
-          if (char.toLowerCase() === letter.toLowerCase()) {
+          if (lastCharMatch == false) {
             return (
               <span key={index} style={{ color: color }}>
                 {char}
@@ -37,7 +35,30 @@ function App() {
       </>
     );
   }
-    
+  
+  const handleInputChange = (e) => {
+    checkFinalValue(e);
+    checkLastChar(e);
+  };
+
+  const checkFinalValue = (e) => {
+    const inputValue = e.target.value;
+    setText(inputValue);
+    setIsInputMatch(inputValue === promptText);
+  };
+
+  const checkLastChar = (e) => {
+    if (lastCharMatch) { //if last char matches, input is enabled
+      setIsInputEnabled(false); // enable input when lastCharMatch is true
+    }
+    else {
+      setIsInputEnabled(true);
+    }
+
+    let currentStatus = text[text.length - 1] === promptText[text.length - 1];
+    setLastCharMatch(currentStatus);
+  }
+
   return (
     <div style={{ display: "flex" }}>
       <div style={{ flex: 1 }}>
@@ -49,10 +70,16 @@ function App() {
         <input
           type="text"
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={handleInputChange}
+          disabled={!isInputEnabled} // disable input when lastCharMatch is false
         />
-        <ColoredText text={text} letter="o" color="red" />
+        <ColoredText text={text} letter= {lastCharMatch} color="red" />
         {statusSquare}
+      </div>
+      <div>
+        <p>{lastCharMatch} </p>
+        {isInputMatch ? <p>Input matches prompt!</p> : <p>Input does not match prompt.</p>}
+
       </div>
     </div>
   );
