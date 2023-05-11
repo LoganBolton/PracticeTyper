@@ -37,22 +37,30 @@ function App() {
   }
   
   const handleInputChange = (e) => {
-    checkFinalValue(e);
-    checkLastChar(e);
+    charInput(e); //if input is enabled, change text
+    
+    checkFinalValue(e); // see if input matches prompt
+    checkLastChar(e); //check if new char matches prompt char
   };
 
+  const charInput = (e) => {
+    const inputValue = e.target.value;
+
+    if (isInputEnabled) {
+      setText(inputValue);
+    }
+  }
   const checkFinalValue = (e) => {
     const inputValue = e.target.value;
-    setText(inputValue);
     setIsInputMatch(inputValue === promptText);
   };
 
   const checkLastChar = (e) => {
     if (lastCharMatch) { //if last char matches, input is enabled
-      setIsInputEnabled(false); // enable input when lastCharMatch is true
+      setIsInputEnabled(true); // enable input when lastCharMatch is true
     }
     else {
-      setIsInputEnabled(true);
+      setIsInputEnabled(false);
     }
 
     let currentStatus = text[text.length - 1] === promptText[text.length - 1];
@@ -71,7 +79,6 @@ function App() {
           type="text"
           value={text}
           onChange={handleInputChange}
-          disabled={!isInputEnabled} // disable input when lastCharMatch is false
         />
         <ColoredText text={text} letter= {lastCharMatch} color="red" />
         {statusSquare}
