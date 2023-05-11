@@ -22,15 +22,6 @@ code {
   font-family: 'Trebuchet MS';
 }
 
-.upperText {
-  position: absolute;
-  top: 0px;
-  
-  color: green;
-  font-size: xx-large;
-  font-family: 'Trebuchet MS';
-}
-
 .containerDiv {
   position: relative;
   margin: 0rem 3rem 10rem 3rem;
