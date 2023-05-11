@@ -56,6 +56,9 @@ function App() {
   };
 
   const checkLastChar = (e) => {
+    if (text != "") {
+      //for some reason text's state is not being updated on the first char input and is ""
+    }
     if (lastCharMatch) { //if last char matches, input is enabled
       setIsInputEnabled(true); // enable input when lastCharMatch is true
     }
@@ -79,6 +82,12 @@ function App() {
           type="text"
           value={text}
           onChange={handleInputChange}
+          onKeyDown={(e) => {
+            //if input is disabled, allow delete still
+            if (!isInputEnabled && (e.keyCode === 8 || e.keyCode === 46)) {
+              setText(text.slice(0, -1));
+            }
+          }}
         />
         <ColoredText text={text} letter= {lastCharMatch} color="red" />
         {statusSquare}
