@@ -4,7 +4,7 @@ import './index.css';
 function App() {
   const [text, setText] = useState("");
   const [userInput, setUserInput] = useState("");
-  const [promptText, setPromptText] = useState("type this out");
+  const [promptText, setPromptText] = useState("typ");
   const [isInputMatch, setIsInputMatch] = useState(false);
   const [isInputEnabled, setIsInputEnabled] = useState(true);
   const [lastCharMatch, setLastCharMatch] = useState(true);
@@ -20,8 +20,8 @@ function App() {
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     checkLastChar(inputValue);
-    charInput(inputValue);
-    if ({text} == {promptText}) {
+    charInput(inputValue);    
+    if (inputValue == promptText) {
       setIsInputMatch(true);
     }
   };
@@ -65,7 +65,6 @@ function App() {
       </div>
       <div>
         <p>text: "{text}"</p>
-        <p>userInput: "{userInput}"</p>
         <p>inputEnabled: "{isInputEnabled.toString()}"</p>
         <p>last char: {lastCharMatch.toString()}</p>
         {isInputMatch ? <p>Input matches prompt!</p> : <p>Input does not match prompt.</p>}
