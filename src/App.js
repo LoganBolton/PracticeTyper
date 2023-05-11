@@ -19,11 +19,21 @@ function App() {
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
+    const lastIndex = inputValue.length - 1;
+
     checkLastChar(inputValue);
     charInput(inputValue);    
     if (inputValue == promptText) {
       setIsInputMatch(true);
     }
+
+    if (!lastCharMatch && lastIndex < promptText.length) {
+      const updatedPromptText = promptText.slice(0, lastIndex) + `<span style="color: red">${promptText[lastIndex]}</span>` + promptText.slice(lastIndex + 1);
+      setPromptText(updatedPromptText);
+    } else if (lastCharMatch) {
+      setPromptText(promptText.replace('<span style="color: red">', '').replace('</span>', ''));
+    }
+
   };
 
   const checkLastChar = (inputValue) => {
@@ -40,13 +50,18 @@ function App() {
     }
   }
 
+  const promptTextArray = promptText.split("");
+  const lastCharStyle = lastCharMatch ? {} : { color: "red" };
+
   return (
     <div style={{ display: "flex" }}>
       <div style={{ flex: 1 }}>
         <div className="containerDiv">
-          <p>
-            {promptText}
-          </p>
+        
+        <p className="promptText" dangerouslySetInnerHTML={{ __html: promptText }}></p>
+        {/* <p className ="inputText">
+          {text}
+        </p> */}
         </div>
         <input
           type="text"
