@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+ }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -28,7 +32,7 @@ code {
 }
 
 .containerDiv {
-  margin: 0rem 3rem 10rem 3rem;
+  margin: 5rem 7rem 10rem 7rem;
 }
 .green {
   background-color: green;
@@ -36,12 +40,6 @@ code {
 
 .red {
   background-color: red;
-}
-
-.promptText, .inputText {
-  position: absolute;
-  top: 0;
-  left: 10px;
 }
 
 .inputText {
@@ -55,3 +53,51 @@ code {
 .hidden {
   visibility: hidden;
 }
+
+.element {
+  background-color: #f2f2f2;
+}
+
+body{
+  background-color: rgb(103, 103, 103);
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  color: white;
+}
+
+h1 {
+
+}
+
+#wrapperHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: wheat;
+  height: 5rem;
+}
+
+.inputDiv {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+
+  height: 15rem;
+  border: solid 10px wheat;
+  border-radius: 1.5rem;
+  border: 10px solid rgba(255,255,255,.5);
+
+}
+
+.inputElement {
+  width: 100%;
+  font-size: x-large;
+  padding-bottom: 13rem;
+  border: none;
+  outline: none;
+}
+
+
