@@ -54,66 +54,82 @@ function App() {
   }, []);
 
   return (
-    <div style={{}}>
+    <div>
       <div id="wrapperHeader">
-        <div className="" id="header">
-          <h1>
-            TypeScripts
-          </h1>
+        <div id="header">
+          <h1>TypeScripts</h1>
         </div>
       </div>
       <div style={{ flex: 1 }}>
         <div className="containerDiv">
           <div className="inputDiv">
-            <div className="inputField"></div>
-              <input className="inputElement"
-                ref={inputRef} // Set the ref to the input element
+            <div className="inputField">
+              <input
+                className="inputElement"
+                ref={inputRef}
                 type="text"
                 wrap="soft"
                 value={text}
                 onChange={handleInputChange}
-                disabled = {isInputMatch}
+                disabled={isInputMatch}
                 spellCheck="false"
               />
-              <p className="promptText">
-                {" "}
-                {/* turns promptText into an array of chars */}
-                {/* .map() iterates through every char in the array */}
-                {/*  */}
-                {promptText.split("").map((char, index) => (
+            </div>
+            <p className="promptText">
+              {" "}
+              {/* turns promptText into an array of chars */}
+              {/* .map() iterates through every char in the array */}
+              {promptText.split("").map((char, index) => {
+                if (char === "\n") {
+                  // converts escape character to newline
+                  return <br key={index} />;
+                }
+                if (char === "\t") {
+                  return <span key={index}>&emsp;</span>;
+                }
+                return (
                   <span
                     key={index}
                     id={
                       wrongChars[index] === undefined
-                      ? null //if there is no index in wrongChars for this index, ID is null
-                        : wrongChars[index] //if the value for the index is true, set to correct and vice versa
+                        ? null // if there is no index in wrongChars for this index, ID is null
+                        : wrongChars[index] // if the value for the index is true, set to correct and vice versa
                         ? "correct"
                         : "incorrect"
                     }
                   >
                     {char}
                   </span>
-                ))}
-              </p>
-            </div>
-            <p>prompt: "{promptText}"</p>
+                );
+              })}
+            </p>
           </div>
+          <p>prompt: "{promptText}"</p>
           <p className="">This is a test</p>
-          <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          id="changePrompt"
-          onClick={promptButtonClick}>Change Prompt</button>
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            id="changePrompt"
+            onClick={promptButtonClick}
+          >
+            Change Prompt
+          </button>
         </div>
-      <div className="debugInfo">
-        <p>text: "{text}"</p>
-        {isInputMatch ? <p>Input matches prompt!</p> : <p>Input does not match prompt.</p>}
-        <h3>Wrong Characters:</h3>
-        <ul>
-          {Object.keys(wrongChars).map((index) => (
-            <li key={index}>
-              Index {index} is {wrongChars[index] ? "correct" : "wrong"}
-            </li>
-          ))}
-        </ul>
+        <div className="debugInfo">
+          <p>text: "{text}"</p>
+          {isInputMatch ? (
+            <p>Input matches prompt!</p>
+          ) : (
+            <p>Input does not match prompt.</p>
+          )}
+          <h3>Wrong Characters:</h3>
+          <ul>
+            {Object.keys(wrongChars).map((index) => (
+              <li key={index}>
+                Index {index} is {wrongChars[index] ? "correct" : "wrong"}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
