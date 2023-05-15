@@ -104,6 +104,7 @@ p {
 
 .promptText {
   color: grey;
+  font-family: 'Courier Prime', monospace;
   font-size: x-large;
   position: absolute;
   top: 5%;
