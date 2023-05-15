@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './index.css';
 
 function App() {
@@ -6,6 +6,8 @@ function App() {
   const [promptText, setPromptText] = useState("type out this string");
   const [isInputMatch, setIsInputMatch] = useState(false);
   const [wrongChars, setWrongChars] = useState({})
+  const inputRef = useRef(null); // Create a ref for the input element
+
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -38,10 +40,14 @@ function App() {
     });
   }
   
-  // Runs findWrongChars() every time text is updated
+  // Runs findWrongChars() every time input text is updated
   useEffect(() => {
     findWrongChars();
   }, [text]);
+
+  useEffect(() => {
+    inputRef.current.focus(); // Focus on the input element when the component mounts
+  }, []);
 
   return (
     <div style={{}}>
@@ -57,31 +63,33 @@ function App() {
           <div className="inputDiv">
             <div className="inputField"></div>
               <input className="inputElement"
+                ref={inputRef} // Set the ref to the input element
                 type="text"
                 wrap="soft"
                 value={text}
                 onChange={handleInputChange}
                 disabled = {isInputMatch}
+                spellCheck="false"
               />
+              <p className="promptText">
+                {" "}
+                {promptText.split("").map((char, index) => (
+                  <span
+                    key={index}
+                    id={
+                      wrongChars[index] === undefined
+                        ? null
+                        : wrongChars[index]
+                        ? "correct"
+                        : "incorrect"
+                    }
+                  >
+                    {char}
+                  </span>
+                ))}
+              </p>
             </div>
             <p>prompt: "{promptText}"</p>
-            <p>
-              prompt:{" "}
-              {promptText.split("").map((char, index) => (
-                <span
-                  key={index}
-                  id={
-                    wrongChars[index] === undefined
-                      ? null
-                      : wrongChars[index]
-                      ? "correct"
-                      : "incorrect"
-                  }
-                >
-                  {char}
-                </span>
-              ))}
-            </p>
           </div>
         </div>
       <div className="debugInfo">
@@ -95,8 +103,6 @@ function App() {
             </li>
           ))}
         </ul>
-
-        {/* <p id="color-change">Move your cursor over this text to change its color.</p> */}
       </div>
     </div>
   );

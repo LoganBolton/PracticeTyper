@@ -26,11 +26,6 @@ code {
   font-family: 'Trebuchet MS';
 }
 
-.promptText {
-  display: flex;
-  color: gray;
-}
-
 .containerDiv {
   margin: 5rem 7rem 10rem 7rem;
 }
@@ -44,6 +39,7 @@ code {
 
 .inputText {
   display: flex;
+  display: none;
 }
 
 .wrong {
@@ -68,10 +64,6 @@ p {
   color: white;
 }
 
-h1 {
-
-}
-
 #wrapperHeader {
   display: flex;
   justify-content: center;
@@ -84,6 +76,7 @@ h1 {
   background-color: white;
   display: flex;
   justify-content: center;
+  position: relative;
 
   height: 15rem;
   border: solid 10px wheat;
@@ -98,6 +91,7 @@ h1 {
   padding-bottom: 13rem;
   border: none;
   outline: none;
+  color: transparent;
 }
 
 #correct {
@@ -106,4 +100,20 @@ h1 {
 
 #incorrect {
   color: red;
+}
+
+.promptText {
+  color: grey;
+  font-size: x-large;
+  position: absolute;
+  top: 5%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 100%; /* add this to make sure the text wraps inside the container */
+
+}
+
+h1 {
+  font-family: 'Courier Prime', monospace;
 }
