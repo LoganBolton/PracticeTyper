@@ -10,7 +10,10 @@ function App() {
 
   const promptButtonClick = () => {
     setPromptText("test\nnewline\n\ttabbed newline");
-    // Add your desired functionality here
+  };
+
+  const reloadPage = () => {
+    window.location.reload(); // Reload the page
   };
 
   const handleInputChange = (e) => {
@@ -57,7 +60,7 @@ function App() {
     <div>
       <div id="wrapperHeader">
         <div id="header">
-          <h1>TypeScripts</h1>
+          <h1 className="text-3xl font-bold">TypeScripts</h1>
         </div>
       </div>
       <div style={{ flex: 1 }}>
@@ -109,10 +112,13 @@ function App() {
           <button
             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
             id="changePrompt"
-            onClick={promptButtonClick}
-          >
+            onClick={promptButtonClick}>
             Change Prompt
           </button>
+          <button
+            className="bg-gray-200 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded ml-2"
+            onClick={reloadPage}
+          >Reload Page</button>
         </div>
         <div className="debugInfo">
           <p>text: "{text}"</p>
