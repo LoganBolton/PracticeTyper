@@ -100,4 +100,6 @@ h1 {
   outline: none;
 }
 
-
+.correct {
+  color: black;
+}
