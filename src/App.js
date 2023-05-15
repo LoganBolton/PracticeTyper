@@ -8,6 +8,10 @@ function App() {
   const [wrongChars, setWrongChars] = useState({})
   const inputRef = useRef(null); // Create a ref for the input element
 
+  const promptButtonClick = () => {
+    setPromptText("test\nnewline\n\ttabbed newline");
+    // Add your desired functionality here
+  };
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -73,13 +77,16 @@ function App() {
               />
               <p className="promptText">
                 {" "}
+                {/* turns promptText into an array of chars */}
+                {/* .map() iterates through every char in the array */}
+                {/*  */}
                 {promptText.split("").map((char, index) => (
                   <span
                     key={index}
                     id={
                       wrongChars[index] === undefined
-                        ? null
-                        : wrongChars[index]
+                      ? null //if there is no index in wrongChars for this index, ID is null
+                        : wrongChars[index] //if the value for the index is true, set to correct and vice versa
                         ? "correct"
                         : "incorrect"
                     }
@@ -91,6 +98,10 @@ function App() {
             </div>
             <p>prompt: "{promptText}"</p>
           </div>
+          <p className="">This is a test</p>
+          <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          id="changePrompt"
+          onClick={promptButtonClick}>Change Prompt</button>
         </div>
       <div className="debugInfo">
         <p>text: "{text}"</p>
