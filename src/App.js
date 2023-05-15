@@ -17,6 +17,10 @@ function App() {
       const { [deletedIndex]: deletedChar, ...rest } = wrongChars;
       setWrongChars(rest);
     }
+
+    if (inputValue == promptText) {
+      setIsInputMatch(true);
+    }
   };
   
   const findWrongChars = () => {
@@ -34,6 +38,7 @@ function App() {
     });
   }
   
+  // Runs findWrongChars() every time text is updated
   useEffect(() => {
     findWrongChars();
   }, [text]);
@@ -56,9 +61,27 @@ function App() {
                 wrap="soft"
                 value={text}
                 onChange={handleInputChange}
+                disabled = {isInputMatch}
               />
             </div>
             <p>prompt: "{promptText}"</p>
+            <p>
+              prompt:{" "}
+              {promptText.split("").map((char, index) => (
+                <span
+                  key={index}
+                  id={
+                    wrongChars[index] === undefined
+                      ? null
+                      : wrongChars[index]
+                      ? "correct"
+                      : "incorrect"
+                  }
+                >
+                  {char}
+                </span>
+              ))}
+            </p>
           </div>
         </div>
       <div className="debugInfo">
