@@ -100,11 +100,11 @@ p {
   color: transparent;
 }
 
-#correct {
+.correct {
   color: black;
 }
 
-#incorrect {
+.incorrect {
   color: red;
 }
 
