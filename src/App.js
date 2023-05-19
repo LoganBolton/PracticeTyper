@@ -16,6 +16,13 @@ function App() {
     window.location.reload(); // Reload the page
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setText(text + "\t");
+    }
+  };
+  
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setText(inputValue);
@@ -27,7 +34,7 @@ function App() {
       setWrongChars(rest);
     }
 
-    if (inputValue == promptText) {
+    if (inputValue === promptText) {
       setIsInputMatch(true);
     }
   };
@@ -53,7 +60,7 @@ function App() {
   }, [text]);
 
   useEffect(() => {
-    inputRef.current.focus(); // Focus on the input element when the component mounts
+    inputRef.current.focus(); // Focus on the input element when the page loads
   }, []);
 
   return (
@@ -76,10 +83,10 @@ function App() {
                 onChange={handleInputChange}
                 disabled={isInputMatch}
                 spellCheck="false"
+                onKeyDown={handleKeyDown}
               />
             </div>
             <p className="promptText">
-              {" "}
               {/* turns promptText into an array of chars */}
               {/* .map() iterates through every char in the array */}
               {promptText.split("").map((char, index) => {
@@ -93,7 +100,8 @@ function App() {
                 return (
                   <span
                     key={index}
-                    id={
+                    id={index}
+                    className={
                       wrongChars[index] === undefined
                         ? null // if there is no index in wrongChars for this index, ID is null
                         : wrongChars[index] // if the value for the index is true, set to correct and vice versa
@@ -106,9 +114,9 @@ function App() {
                 );
               })}
             </p>
+            {/* <div className="w-1 h-8 bg-black" id= "pointer"></div> */}
           </div>
           <p>prompt: "{promptText}"</p>
-          <p className="">This is a test</p>
           <button
             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
             id="changePrompt"
